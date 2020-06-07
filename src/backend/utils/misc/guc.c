@@ -585,6 +585,7 @@ int			ssl_renegotiation_limit;
  * need to be duplicated in all the different implementations of pg_shmem.c.
  */
 int			huge_pages;
+int			huge_page_size;
 
 /*
  * These variables are all dummies that don't do anything, except in some
@@ -2267,6 +2268,16 @@ static struct config_int ConfigureNamesInt[] =
 		},
 		&NBuffers,
 		1024, 16, INT_MAX / 2,
+		NULL, NULL, NULL
+	},
+	{
+		{"huge_page_size", PGC_POSTMASTER, RESOURCES_MEM,
+			gettext_noop("The size of huge page that should be used."),
+			NULL,
+			GUC_UNIT_KB
+		},
+		&huge_page_size,
+		0, 0, INT_MAX,
 		NULL, NULL, NULL
 	},
 
